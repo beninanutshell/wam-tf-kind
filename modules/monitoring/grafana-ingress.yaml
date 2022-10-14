@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: monitoring
+  name: grafana
+  labels:
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: prom-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grafana.sub.domain.tld`)
+      kind: Rule
+      services:
+        - namespace: monitoring
+          name: prom-stack-grafana
+          port: 80

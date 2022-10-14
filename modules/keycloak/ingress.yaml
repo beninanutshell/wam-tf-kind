@@ -1,0 +1,15 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: keycloak
+spec:
+  entryPoints: # We listen to requests coming from ports 80 and 443
+    - web
+    - websecure
+  routes:
+    - match: Host(`keycloak.sub.domain.tld`)
+      kind: Rule
+      services:
+        - name: keycloak-http # Requests will be forwarded to this service
+          port: 80

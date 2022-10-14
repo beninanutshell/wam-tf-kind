@@ -1,0 +1,50 @@
+---
+additionalArguments:
+  - --api.debug=true
+  - --providers.kubernetesingress
+  - --providers.kubernetescrd
+  - --metrics.prometheus=true
+  - --accesslog=true
+  - --ping
+  - --metrics.prometheus.entryPoint=metrics
+  - --entrypoints.websecure.http.tls.certresolver=gandiv5
+  - --entrypoints.websecure.http.tls.domains[0].main=sub.domain.tld
+  - --entrypoints.websecure.http.tls.domains[0].sans=*.sub.domain.tld
+  - --certificatesresolvers.gandiv5.acme.dnschallenge.provider=gandiv5
+  - --certificatesresolvers.gandiv5.acme.email=email@address.com
+  - --certificatesresolvers.gandiv5.acme.dnschallenge.resolvers=1.1.1.1
+  - --certificatesresolvers.gandiv5.acme.storage=/certs/acme.json
+  #- --certificatesresolvers.gandiv5.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+  - --certificatesresolvers.gandiv5.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
+ports:
+  web:
+    redirectTo: websecure
+
+env:
+  - name: GANDIV5_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: gandiv5-api-key
+        key: api-key
+
+ingressRoute:
+  dashboard:
+    enabled: false
+
+persistence:
+  enabled: true
+  path: /certs
+  size: 128M
+
+securityContext:
+  capabilities:
+    drop: [ALL]
+    add: [NET_BIND_SERVICE]
+  readOnlyRootFilesystem: true
+  runAsGroup: 0
+  runAsNonRoot: false
+  runAsUser: 0
+
+logs:
+  general:
+    level: DEBUG

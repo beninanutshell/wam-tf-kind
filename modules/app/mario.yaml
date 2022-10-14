@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mario
+  labels:
+    app: mario
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mario
+  template:
+    metadata:
+      labels:
+        app: mario
+    spec:
+      containers:
+        - image: beninanutshell/webgame:1.1
+          name: mario
+          ports:
+            - name: web
+              containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-mario
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: mario
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      # targetAverageValue: 200Mi  not work, changed to below
+      targetAverageUtilization: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mario
+spec:
+  selector:
+    app: mario
+  ports:
+    - port: 80
+      targetPort: web
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mario
+spec:
+  entryPoints: # We listen to requests coming from ports 80 and 443
+    - web
+    - websecure
+  routes:
+    - match: Host(`mario.sub.domain.tld`)
+      kind: Rule
+      services:
+        - name: mario # Requests will be forwarded to this service
+          port: 80

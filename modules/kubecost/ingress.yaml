@@ -1,0 +1,15 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubecost-cost-analyzer
+spec:
+  entryPoints: # We listen to requests coming from ports 80 and 443
+    - web
+    - websecure
+  routes:
+    - match: Host(`kubecost.sub.domain.tld`)
+      kind: Rule
+      services:
+        - name: kubecost-cost-analyzer # Requests will be forwarded to this service
+          port: 9090
