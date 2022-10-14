@@ -25,11 +25,8 @@ jobs:
       - name: Run TFLint
         run: tflint -f compact
 
-  terrascan_job:
+  terrascan-tf:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./iac
     name: terrascan-action
     steps:
       - name: Checkout repository
@@ -43,7 +40,13 @@ jobs:
           iac_dir: "iac/"
           policy_type: "all"
           only_warn: true
-      - name: Run Terrascan k8S
+  terrascan-k8s:
+    runs-on: ubuntu-latest
+    name: terrascan-action
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run Terrascan k8s
         id: terrascan-k8s
         uses: accurics/terrascan-action@main
         with:
