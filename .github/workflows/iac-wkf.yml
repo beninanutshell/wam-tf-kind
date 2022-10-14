@@ -29,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     name: terrascan-tf
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
       - name: Run Terrascan IaC
         id: terrascan-iac
         uses: accurics/terrascan-action@main
@@ -44,8 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     name: terrascan-k8s
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
       - name: Run Terrascan k8s
         id: terrascan-k8s
         uses: accurics/terrascan-action@main
