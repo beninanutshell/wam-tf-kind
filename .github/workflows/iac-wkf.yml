@@ -27,7 +27,7 @@ jobs:
 
   terrascan-tf:
     runs-on: ubuntu-latest
-    name: terrascan-action
+    name: terrascan-tf
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -42,7 +42,7 @@ jobs:
           only_warn: true
   terrascan-k8s:
     runs-on: ubuntu-latest
-    name: terrascan-action
+    name: terrascan-k8s
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
