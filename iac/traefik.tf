@@ -16,7 +16,7 @@ data "template_file" "gandi" {
 
 resource "k8s_manifest" "gandi" {
   content   = data.template_file.gandi.rendered
-  namespace = kubernetes_namespace.traefik-system.metadata.0.name
+  namespace = kubernetes_namespace.traefik-system.metadata[0].name
 
   depends_on = [
     helm_release.sealed_secrets,
@@ -31,7 +31,7 @@ resource "k8s_manifest" "ingress_traefik_dashboard" {
   count = length(local.resources_ingress_traefik)
 
   content   = local.resources_ingress_traefik[count.index]
-  namespace = kubernetes_namespace.traefik-system.metadata.0.name
+  namespace = kubernetes_namespace.traefik-system.metadata[0].name
 
   depends_on = [
     helm_release.traefik,
@@ -40,7 +40,7 @@ resource "k8s_manifest" "ingress_traefik_dashboard" {
 
 resource "k8s_manifest" "secret_traefik_auth" {
   content   = data.template_file.secret_traefik_auth.rendered
-  namespace = kubernetes_namespace.traefik-system.metadata.0.name
+  namespace = kubernetes_namespace.traefik-system.metadata[0].name
 
   depends_on = [
     helm_release.sealed_secrets,
@@ -49,7 +49,7 @@ resource "k8s_manifest" "secret_traefik_auth" {
 
 resource "k8s_manifest" "monitoring" {
   content   = data.template_file.monitoring.rendered
-  namespace = kubernetes_namespace.traefik-system.metadata.0.name
+  namespace = kubernetes_namespace.traefik-system.metadata[0].name
 
   depends_on = [
     helm_release.prometheus,
@@ -60,18 +60,18 @@ resource "helm_release" "traefik" {
   chart            = "traefik"
   name             = "traefik"
   repository       = "https://helm.traefik.io/traefik"
-  namespace        = kubernetes_namespace.traefik-system.metadata.0.name
+  namespace        = kubernetes_namespace.traefik-system.metadata[0].name
   create_namespace = "false"
 
   values = [
-    "${file("../modules/traefik/values.yaml")}"
+    file("../modules/traefik/values.yaml")
   ]
 
   set {
     name  = "metrics.prometheus.enabled"
     value = "true"
   }
-  
+
   depends_on = [
     helm_release.metallb, helm_release.sealed_secrets
   ]

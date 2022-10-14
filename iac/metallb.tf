@@ -7,7 +7,7 @@ resource "helm_release" "metallb" {
   version          = "0.12.1"
 
   values = [
-    "${file("../modules/metallb/values.yaml")}"
+    file("../modules/metallb/values.yaml")
   ]
 
   depends_on = [

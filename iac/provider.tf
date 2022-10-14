@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 1.0"
   required_providers {
     k8s = {
       version = "0.9.1"
@@ -12,6 +13,10 @@ terraform {
       version = ">= 2.12.1"
       source  = "hashicorp/kubernetes"
     }
+    kubernetes-alpha = {
+      version = ">= 2.12.1"
+      source  = "hashicorp/kubernetes"
+    }
     keycloak = {
       source  = "mrparkers/keycloak"
       version = "3.9.1"
@@ -20,8 +25,17 @@ terraform {
       source  = "hashicorp/null"
       version = "3.1.1"
     }
+    template = {
+      source  = "hashicorp/template"
+      version = "2.2.0"
+    }
   }
 }
+
+provider "template" {}
+provider "keycloak" {}
+provider "k8s" {}
+provider "null" {}
 
 provider "helm" {
   kubernetes {

@@ -31,7 +31,7 @@ resource "kubernetes_namespace" "argocd" {
     }
     name = "argocd"
   }
-  
+
   depends_on = [
     helm_release.cilium
   ]
@@ -66,7 +66,7 @@ resource "k8s_manifest" "argo_demo" {
   namespace = kubernetes_namespace.argocd.id
 
   depends_on = [
-    helm_release.traefik,k8s_manifest.install_argocd
+    helm_release.traefik, k8s_manifest.install_argocd
   ]
 }
 

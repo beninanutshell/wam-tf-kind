@@ -10,7 +10,7 @@ resource "k8s_manifest" "mario" {
   count = length(local.resources_mario)
 
   content   = local.resources_mario[count.index]
-  namespace = kubernetes_namespace.mario.metadata.0.name
+  namespace = kubernetes_namespace.mario.metadata[0].name
 
 }
 

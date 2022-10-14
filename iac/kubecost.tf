@@ -6,7 +6,7 @@ resource "helm_release" "kubecost" {
   create_namespace = "true"
 
   values = [
-    "${file("../modules/kubecost/values.yaml")}"
+    file("../modules/kubecost/values.yaml")
   ]
   depends_on = [
     helm_release.cilium

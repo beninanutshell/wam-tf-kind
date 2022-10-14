@@ -1,12 +1,12 @@
 resource "helm_release" "prometheus" {
   chart            = "kube-prometheus-stack"
   name             = "prom-stack"
-  namespace        = kubernetes_namespace.monitoring.metadata.0.name
+  namespace        = kubernetes_namespace.monitoring.metadata[0].name
   repository       = "https://prometheus-community.github.io/helm-charts"
   create_namespace = "false"
 
   values = [
-    "${file("../modules/monitoring/values.yaml")}"
+    file("../modules/monitoring/values.yaml")
   ]
 
   depends_on = [
@@ -26,7 +26,7 @@ resource "k8s_manifest" "grafana_ingress" {
   count = length(local.resources_grafana_ingress)
 
   content   = local.resources_grafana_ingress[count.index]
-  namespace = kubernetes_namespace.monitoring.metadata.0.name
+  namespace = kubernetes_namespace.monitoring.metadata[0].name
 
   depends_on = [
     helm_release.traefik,
@@ -45,7 +45,7 @@ resource "k8s_manifest" "admin_monitoring" {
   count = length(local.resources_admin_monitoring)
 
   content   = local.resources_admin_monitoring[count.index]
-  namespace = kubernetes_namespace.monitoring.metadata.0.name
+  namespace = kubernetes_namespace.monitoring.metadata[0].name
 
 }
 
@@ -60,7 +60,7 @@ resource "kubernetes_namespace" "monitoring" {
     }
     name = "monitoring"
   }
-  
+
   depends_on = [
     helm_release.cilium
   ]

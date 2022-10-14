@@ -6,7 +6,7 @@ resource "helm_release" "keycloak" {
   create_namespace = "true"
 
   values = [
-    "${file("../modules/keycloak/values.yaml")}"
+    file("../modules/keycloak/values.yaml")
   ]
 
   depends_on = [

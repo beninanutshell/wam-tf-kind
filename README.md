@@ -73,7 +73,7 @@ Joli Kluster's goal is to deploy locally a production-ready kubernetes cluster. 
 * SSL Management - [LetsEncrypt ACME Client Implementations for Traefik](https://letsencrypt.org/docs/client-options/)
 * DNS Provider - [Gandi](https://www.gandi.net/fr)
 
-Demo applications will also be deployed on the cluster. 
+Demo applications will also be deployed on the cluster.
 Thanks to [Alexwhen](https://github.com/alexwhen/docker-2048).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -95,7 +95,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 This stack is for Developers, DevOps engineers, Kubernetes Developers and Administrators.
 There is a lot of prerequisites packages you need to install locally before deploying the full stack.
-Actually, the stack is **only** MacOS compatible. 
+Actually, the stack is **only** MacOS compatible.
 
 ### Prerequisites
 
@@ -108,7 +108,7 @@ Actually, the stack is **only** MacOS compatible.
 [Docker](https://www.docker.com/) - An open platform for developing, shipping, and running containerized applications
   ```sh
   brew install docker
-  ```   
+  ```
 [Docker Mac Net Connect](https://github.com/chipmk/docker-mac-net-connect) - To connect directly to Docker-for-Mac containers via IP address.
   ```sh
   # Install via Homebrew
@@ -120,11 +120,11 @@ Actually, the stack is **only** MacOS compatible.
   ```sh
   brew tap hashicorp/tap
   brew install hashicorp/tap/terraform
-  ```   
+  ```
 [Kubectl](https://www.terraform.io/) - The Kubernetes command-line tool to run commands against Kubernetes clusters.
   ```sh
   brew install kubectl
-  ```   
+  ```
 [Helm](https://helm.sh/) - The Kubernetes package manager.
   ```sh
   brew install helm
@@ -154,7 +154,7 @@ Actually, the stack is **only** MacOS compatible.
    # note the CIDR Range for your kind cluster (example: 172.18.0.0/16) and delete the temp cluster
    kind delete cluster --name temp
   ```
-2. From your kind network IP range, you must pick some IPs addresses for MetalLB. It will allow us to deploy Kubernetes Load Balancer Service type for all our applications reachable outside the cluster (example;: from my master range 172.18.0.0/16, I pick these IPs 172.18.0.150-172.18.0.200. So my first LB will pick the 172.18.0.150 IP address). 
+2. From your kind network IP range, you must pick some IPs addresses for MetalLB. It will allow us to deploy Kubernetes Load Balancer Service type for all our applications reachable outside the cluster (example;: from my master range 172.18.0.0/16, I pick these IPs 172.18.0.150-172.18.0.200. So my first LB will pick the 172.18.0.150 IP address).
 
 3. Create a A record on your GANDI Provider for your futur Wildcard SAN Certificate. IP addresse should be the first one pick previously (example: 172.18.0.150). This IPs will be used by Ingress Controller Traefik.
  ```
