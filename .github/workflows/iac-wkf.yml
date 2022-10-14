@@ -34,12 +34,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Run Terrascan
+      - name: Run Terrascan IaC
         id: terrascan
         uses: accurics/terrascan-action@main
         with:
           iac_type: "terraform"
           iac_version: "v14"
           iac_dir: "iac/"
+          policy_type: "all"
+          only_warn: true
+      - name: Run Terrascan k8S
+        id: terrascan
+        uses: accurics/terrascan-action@main
+        with:
+          iac_type: "k8s"
+          iac_version: "v1"
+          iac_dir: "modules/"
           policy_type: "all"
           only_warn: true
