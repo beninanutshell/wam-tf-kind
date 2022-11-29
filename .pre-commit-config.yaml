@@ -3,7 +3,7 @@ repos:
     rev: v1.76.0
     hooks:
       - id: terraform_fmt
-      - id: terraform_docs_replace
+      - id: terraform_docs
       - id: terraform_tflint
       - id: terraform_tfsec
         files: ^iac/

@@ -77,3 +77,4 @@ resource "k8s_manifest" "argo_metrics" {
   namespace = helm_release.prometheus.namespace
 
 }
+

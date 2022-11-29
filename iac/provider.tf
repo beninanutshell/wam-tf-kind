@@ -33,7 +33,7 @@ terraform {
 }
 
 provider "template" {}
-provider "keycloak" {}
+#provider "keycloak" {}
 provider "k8s" {}
 provider "null" {}
 

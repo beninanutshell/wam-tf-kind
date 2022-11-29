@@ -15,9 +15,9 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | >= 2.6.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.7.1 |
 | <a name="provider_k8s"></a> [k8s](#provider\_k8s) | 0.9.1 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.12.1 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.16.0 |
 | <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 
 ## Modules
