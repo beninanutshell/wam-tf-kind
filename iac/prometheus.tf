@@ -4,6 +4,7 @@ resource "helm_release" "prometheus" {
   namespace        = kubernetes_namespace.monitoring.metadata[0].name
   repository       = "https://prometheus-community.github.io/helm-charts"
   create_namespace = "false"
+  version          = "43.2.1"
 
   values = [
     file("../modules/monitoring/values.yaml")

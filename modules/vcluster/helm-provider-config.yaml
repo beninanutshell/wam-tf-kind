@@ -1,8 +1,7 @@
-sub.domain.tldasub.domain.tldpsub.domain.tldisub.domain.tldVsub.domain.tldesub.domain.tldrsub.domain.tldssub.domain.tldisub.domain.tldosub.domain.tldnsub.domain.tld:sub.domain.tld sub.domain.tldhsub.domain.tldesub.domain.tldlsub.domain.tldmsub.domain.tld.sub.domain.tldcsub.domain.tldrsub.domain.tldosub.domain.tldssub.domain.tldssub.domain.tldpsub.domain.tldlsub.domain.tldasub.domain.tldnsub.domain.tldesub.domain.tld.sub.domain.tldisub.domain.tldosub.domain.tld/sub.domain.tldvsub.domain.tld1sub.domain.tldbsub.domain.tldesub.domain.tldtsub.domain.tldasub.domain.tld1sub.domain.tld
-sub.domain.tldsub.domain.tldksub.domain.tldisub.domain.tldnsub.domain.tlddsub.domain.tld:sub.domain.tld sub.domain.tldPsub.domain.tldrsub.domain.tldosub.domain.tldvsub.domain.tldisub.domain.tlddsub.domain.tldesub.domain.tldrsub.domain.tldCsub.domain.tldosub.domain.tldnsub.domain.tldfsub.domain.tldisub.domain.tldgsub.domain.tld
-sub.domain.tldsub.domain.tldmsub.domain.tldesub.domain.tldtsub.domain.tldasub.domain.tlddsub.domain.tldasub.domain.tldtsub.domain.tldasub.domain.tld:sub.domain.tld
-sub.domain.tldsub.domain.tld sub.domain.tld sub.domain.tldnsub.domain.tldasub.domain.tldmsub.domain.tldesub.domain.tld:sub.domain.tld sub.domain.tlddsub.domain.tldesub.domain.tldfsub.domain.tldasub.domain.tldusub.domain.tldlsub.domain.tldtsub.domain.tld
-sub.domain.tldsub.domain.tldssub.domain.tldpsub.domain.tldesub.domain.tldcsub.domain.tld:sub.domain.tld
-sub.domain.tldsub.domain.tld sub.domain.tld sub.domain.tldcsub.domain.tldrsub.domain.tldesub.domain.tlddsub.domain.tldesub.domain.tldnsub.domain.tldtsub.domain.tldisub.domain.tldasub.domain.tldlsub.domain.tldssub.domain.tld:sub.domain.tld
-sub.domain.tldsub.domain.tld sub.domain.tld sub.domain.tld sub.domain.tld sub.domain.tldssub.domain.tldosub.domain.tldusub.domain.tldrsub.domain.tldcsub.domain.tldesub.domain.tld:sub.domain.tld sub.domain.tldIsub.domain.tldnsub.domain.tldjsub.domain.tldesub.domain.tldcsub.domain.tldtsub.domain.tldesub.domain.tlddsub.domain.tldIsub.domain.tlddsub.domain.tldesub.domain.tldnsub.domain.tldtsub.domain.tldisub.domain.tldtsub.domain.tldysub.domain.tld
-sub.domain.tld
+apiVersion: helm.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: InjectedIdentity

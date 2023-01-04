@@ -12,11 +12,24 @@ restart_traefik() {
   kubectl delete pod -l app.kubernetes.io/name=traefik -n traefik-system --force --grace-period 0
 }
 
+tf_plan() {
+    cd ${BOOTSTRAP_DIR}
+    cd ../iac/
+    terraform pla 2>&1 >/dev/null || exit 11
+}
+
+tf_init() {
+    cd ${BOOTSTRAP_DIR}
+    cd ../iac/
+    terraform init 2>&1 >/dev/null || exit 11
+}
+
 tf_apply() {
     cd ${BOOTSTRAP_DIR}
     cd ../iac/
     terraform apply -auto-approve 2>&1 >/dev/null || exit 11
 }
+
 
 crossplane_role_binding() {
 
@@ -37,6 +50,8 @@ sealed_secret
 tf_apply
 crossplane_role_binding
 keycloak_init
+tf_init
+tf_plan
 tf_apply
 restart_traefik
 sleep 30
